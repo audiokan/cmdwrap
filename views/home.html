@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container">
+  {% if messages.success %}
+  <div role="alert" class="alert alert-success">
+    {% for success in messages.success %}
+    <div>{{ success.msg }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if messages.error %}
+  <div role="alert" class="alert alert-danger">
+    {% for error in messages.error %}
+    <div>{{ error.msg }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if messages.info %}
+  <div role="alert" class="alert alert-info">
+    {% for info in messages.info %}
+    <div>{{ info.msg }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel">
+        <div class="panel-body">
+          <h3>Commands list</h3>
+          {% if commands %}
+            <ul class="list-group">
+              {% for command_key, command in commands %}
+              <li class="list-group-item container-fluid">
+                <span class="col-md-8 col-sm-7 col-xs-6 vcenter">
+                  <strong>{{ command.name }}</strong>
+                </span><!--
+                --><span class="col-md-4 col-sm-5 col-xs-6 text-right vcenter">
+                  <a class="btn btn-sm btn-default" href="#config-{{ command_key }}" data-toggle="modal"><i class="glyphicon glyphicon-cog"></i> Show Config</a>
+                  <a class="btn btn-sm btn-primary" href="/{{ command_key }}"><i class="glyphicon glyphicon-triangle-right"></i> Prepare</a>
+                </span>
+              </li>
+              {% endfor %}
+            </ul>
+            {% for command_key, command in commands %}
+              {% include "partials/modal-config.html" %}
+            {% endfor %}
+          {% else %}
+            <div class="alert alert-warning" role="alert">There is no available commands.</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

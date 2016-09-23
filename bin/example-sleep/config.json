@@ -1,0 +1,20 @@
+{
+  "name": "Example - Date + sleep",
+  "description": "Prints out date 10 times every N seconds",
+  "command": "bash",
+  "args": ["-c", "for i in {1..10}; do date && sleep %sleep%; done;"],
+  "inputs": [
+    {
+      "type": "select",
+      "name": "Sleep time in seconds",
+      "options": [
+        { "text": "1s", "value": "1" },
+        { "text": "2s", "value": "2" },
+        { "text": "5s", "value": "5" },
+        { "text": "10s", "value": "10" }
+      ],
+      "default": "2",
+      "argname": "sleep"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Example - Fetches pages status codes",
+  "description": "Loads web pages from uploaded text file containing urls and outputs csv with status codes",
+  "cwd": "./code/",
+  "command": "phantomjs",
+  "args": ["check-statuscodes.js"],
+  "inputs": [
+    {
+      "type": "file",
+      "name": "Urls file",
+      "filename": "code/urls.txt"
+    }
+  ],
+  "public": [
+    "code/results.csv"
+  ]
+}

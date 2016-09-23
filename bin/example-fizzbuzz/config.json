@@ -1,0 +1,21 @@
+{
+  "name": "Example - FizzBuzz generator",
+  "description": "Generates famous fizzbuzz output.",
+  "cwd": "./code/",
+  "command": "node",
+  "args": ["fizzbuzz.js", "--fizz=%fizz%", "--buzz=%buzz%"],
+  "inputs": [
+    {
+      "type": "text",
+      "name": "Fizz Text",
+      "default": "Fizz",
+      "argname": "fizz"
+    },
+    {
+      "type": "text",
+      "name": "Buzz Text",
+      "default": "Buzz",
+      "argname": "buzz"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container">
+  {% if messages.success %}
+  <div role="alert" class="alert alert-success">
+    {% for success in messages.success %}
+    <div>{{ success.msg }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if messages.error %}
+  <div role="alert" class="alert alert-danger">
+    {% for error in messages.error %}
+    <div>{{ error.msg }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if messages.info %}
+  <div role="alert" class="alert alert-info">
+    {% for info in messages.info %}
+    <div>{{ info.msg }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  <div class="row">
+    <div class="col-sm-12">
+      {% if command.isRunning %}
+        <div role="alert" class="alert alert-info">
+          <div>Currently command is executing. Check <a href="#stdout" data-toggle="tab" class="alert-link">output</a> and <a href="#stderr" data-toggle="tab" class="alert-link">errors</a></div>
+        </div>
+      {% elif command.isRunning === false %}
+        <div role="alert" class="alert alert-danger">
+          <div>Process was executing but terminated. Check <a href="#stdout" data-toggle="tab" class="alert-link">output</a> and <a href="#stderr" data-toggle="tab" class="alert-link">errors</a></div>
+        </div>
+      {% endif %}
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#configuration">Configuration</a></li>
+        <li><a data-toggle="tab" href="#stdout">Output</a></li>
+        <li><a data-toggle="tab" href="#stderr">Errors</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="panel tab-pane fade in active" id="configuration">
+          <div class="panel-body">
+            <h3>{{ command.name }} Configuration</h3>
+            <p>{{ command.description }}</p>
+            <form class="" method="post" action="/{{ command_key }}" enctype="multipart/form-data" onsubmit="return confirm('Are you sure want to launch this command?');">
+              <input type="hidden" name="_csrf" value="{{csrfToken}}">
+              {% if command.inputs and command.inputs.length %}
+                {% for input in command.inputs %}
+                  {% include "partials/arg-input.html" %}
+                {% endfor %}
+              {% endif %}
+              <div class="form-group">
+                <label>Command</label>
+                <input type="text" name="_cmd" value="{{ command.cmd }}" class="form-control" disabled />
+              </div>
+              <button class="btn btn-sm btn-primary" type="submit"{% if command.isRunning %} disabled{% endif %}><i class="glyphicon glyphicon-triangle-right"></i> Launch</button>
+            </form>
+          </div>
+        </div>
+        <div class="panel tab-pane fade" id="stdout">
+          <div class="panel-body">
+            <h3>{{ command.name }} Output</h3>
+            <div>Last modified on: {{ command.stdoutFile | last_modified(command.fullpath) }}</div>
+            <br />
+            <pre>{{ command.stdoutFile | readfile }}</pre>
+          </div>
+        </div>
+        <div class="panel tab-pane fade" id="stderr">
+          <div class="panel-body">
+            <h3>{{ command.name }} Errors</h3>
+            <div>Last modified on: {{ command.stdoutErr | last_modified(command.fullpath) }}</div>
+            <code>{{ command.stdoutErr | readfile(command.fullpath) }}</code>
+          </div>
+        </div>
+      </div>
+      {% if command.public %}
+        <div class="panel">
+          <div class="panel-body">
+            <h3>{{ command.name }} Public files</h3>
+            <ul class="list-group">
+              {% for public_file in command.public %}
+              <li class="list-group-item container-fluid">
+                <span class="col-md-8 col-sm-7 col-xs-6 vcenter">
+                  <strong>{{ public_file }}</strong> (Last modified on: {{ public_file | last_modified(command.fullpath) }})
+                </span><!--
+                --><span class="col-md-4 col-sm-5 col-xs-6 text-right vcenter">
+                  <a class="btn btn-sm btn-primary" href="/{{ command_key }}/view?file={{ public_file }}" target="_blank"><i class="glyphicon glyphicon-list-alt"></i> View</a>
+                </span>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+<div class="form-group">
+  <label>{{ input.name }}</label>
+  {% if input.type == "file" %}
+    <input type="file" name="{{ input.inputname }}" value="" required />
+    {% if input.filename %}
+      <p class="help-block">This file will be uploaded to {% if command.directory %}{{ command.directory }}{% endif %}{{ input.filename }}</p>
+    {% endif %}
+  {% elif input.type == "select" %}
+    <select name="{{ input.inputname }}" class="form-control">
+      {% for option in input.options %}
+      <option value="{{ option.value }}"{% if option.value == input.default %} selected{% endif %}>{{ option.text }}</option>
+      {% endfor %}
+    </select>
+  {% else %}
+    <input type="text" name="{{ input.inputname }}" value="{% if input.default %}{{ input.default }}{% endif %}" class="form-control" required />
+  {% endif %}
+</div>

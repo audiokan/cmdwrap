@@ -1,0 +1,8 @@
+.lock
+stdout.log
+stderr.log
+
+code/mozUrls.txt
+code/mozResults.csv
+code/mozProgress.txt
+code/mozAPIUsage.txt
