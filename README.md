@@ -1,13 +1,13 @@
 # CMD Wrap
 
-CMD Wrap makes easy to expose command line scripts or other executable to the web interface.
+CMD Wrap makes easy to expose command line scripts or other executables to the web interface.
 
 ![](docs/snap/list.png)
 
 ## Case
 
-When you have nodejs/phantom/bash command that needs to be executed by a non-technical person you can use this web interface accessible via browser to make things easier.
-Fully compatible to anything you can execute.
+When you have command line based script that needs to be executed by a non-technical person you can use this web interface accessible via browser to make things easier for him.
+Fully compatible to anything you can execute, runs under the same user as web-server.
 
 * Binary files
 * Scripts (nodejs / python / ruby / php)
@@ -18,6 +18,7 @@ Fully compatible to anything you can execute.
 1. `git clone https://github.com/ziogas/cmdwrap.git`
 1. Create all your needed commands in bin/ folder
 1. Install npm dependencies with `npm install`
+1. Copy `.env.sample` file to `.env` and modify according to your needs
 1. Run `npm start`
 1. On production you might want to run it on process manager like pm2 `pm2 start server.js --name "cmdwrap"`
 
@@ -74,7 +75,7 @@ Possible input configuration:
 
 ## Authentication
 
-If you would like to protect the interface modify `.env` file and change `HTTP_AUTH_USERNAME` with `HTTP_AUTH_PASSWORD`.
+If you would like to protect the interface then modify `HTTP_AUTH_USERNAME` with `HTTP_AUTH_PASSWORD` in `.env` file.
 
 ## Caveats
 
