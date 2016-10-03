@@ -65,8 +65,8 @@
             <div>Last modified on: {{ command.stdoutFile | last_modified(command.fullpath) }}</div>
             <br />
             <br />
-            <div data-reload-time="10" data-reload-label="Reloading in %d..." data-reload-src="/{{ command_key }}/view?file=stdout.log">
-              <div>Reloading in 10 s...</div>
+            <div{% if command.isRunning %} data-reload-time="10" data-reload-label="Reloading in %d..." data-reload-src="/{{ command_key }}/view?file=stdout.log"{% endif %}>
+              {% if command.isRunning %}<div>Reloading in 10 s...</div>{% endif %}
               <pre>{{ command.stdoutFile | readfile }}</pre>
             </div>
           </div>
@@ -77,8 +77,8 @@
             <div>Last modified on: {{ command.stdoutErr | last_modified(command.fullpath) }}</div>
             <br />
             <br />
-            <div data-reload-time="10" data-reload-label="Reloading in %d..." data-reload-src="/{{ command_key }}/view?file=stderr.log">
-              <div>Reloading in 10 s...</div>
+            <div{% if command.isRunning %} data-reload-time="10" data-reload-label="Reloading in %d..." data-reload-src="/{{ command_key }}/view?file=stderr.log"{% endif %}>
+              {% if command.isRunning %}<div>Reloading in 10 s...</div>{% endif %}
               <pre>{{ command.stderrFile | readfile }}</pre>
             </div>
           </div>
