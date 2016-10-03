@@ -155,7 +155,7 @@ exports.launch = function(req, res) {
           errors.push({msg: 'Failed to upload '+input.name});
         }
       } else {
-        if (!req.body[inputname]) {
+        if (!req.body[inputname] && !input.allowEmpty) {
           errors.push({msg: 'Empty '+input.name});
         }
       }

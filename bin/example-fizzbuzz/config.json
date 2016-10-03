@@ -3,7 +3,7 @@
   "description": "Generates famous fizzbuzz output.",
   "cwd": "./code/",
   "command": "node",
-  "args": ["fizzbuzz.js", "--fizz=%fizz%", "--buzz=%buzz%"],
+  "args": ["fizzbuzz.js", "--fizz=%fizz%", "--buzz=%buzz%", "%verbose%"],
   "inputs": [
     {
       "type": "text",
@@ -16,6 +16,17 @@
       "name": "Buzz Text",
       "default": "Buzz",
       "argname": "buzz"
+    },
+    {
+      "type": "select",
+      "name": "Verbose",
+      "options": [
+        { "text": "Yes", "value": "--verbose" },
+        { "text": "No", "value": "" }
+      ],
+      "default": "",
+      "allowEmpty": true,
+      "argname": "verbose"
     }
   ]
 }

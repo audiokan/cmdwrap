@@ -72,6 +72,7 @@ Possible input configuration:
 * `default` Default value, not used in the "file" type
 * `options` Array of input options. Used only in "select" type, format is { "text": "Interface text", "value": "actual value" }
 * `argname` This will be used as a placeholder value in `args`
+* `allowEmpty`: If set the field can be skipped or its value can be empty
 
 ## Authentication
 
