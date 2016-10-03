@@ -80,7 +80,7 @@ exports.fileView = function(req, res) {
       return res.redirect('/'+command);
     }
 
-    publicFiles = commands[command].public;
+    publicFiles = commands[command].public || [];
 
     // Allow log files to be viewed too
     publicFiles.push(path.basename(commands[command].stdoutFile));

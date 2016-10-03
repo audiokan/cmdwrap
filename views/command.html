@@ -64,14 +64,23 @@
             <h3>{{ command.name }} Output</h3>
             <div>Last modified on: {{ command.stdoutFile | last_modified(command.fullpath) }}</div>
             <br />
-            <pre>{{ command.stdoutFile | readfile }}</pre>
+            <br />
+            <div data-reload-time="10" data-reload-label="Reloading in %d..." data-reload-src="/{{ command_key }}/view?file=stdout.log">
+              <div>Reloading in 10 s...</div>
+              <pre>{{ command.stdoutFile | readfile }}</pre>
+            </div>
           </div>
         </div>
         <div class="panel tab-pane fade" id="stderr">
           <div class="panel-body">
             <h3>{{ command.name }} Errors</h3>
             <div>Last modified on: {{ command.stdoutErr | last_modified(command.fullpath) }}</div>
-            <code>{{ command.stdoutErr | readfile(command.fullpath) }}</code>
+            <br />
+            <br />
+            <div data-reload-time="10" data-reload-label="Reloading in %d..." data-reload-src="/{{ command_key }}/view?file=stderr.log">
+              <div>Reloading in 10 s...</div>
+              <pre>{{ command.stderrFile | readfile }}</pre>
+            </div>
           </div>
         </div>
       </div>
