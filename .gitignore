@@ -33,3 +33,6 @@ temp_uploads/*
 stdout.log
 stderr.log
 .lock
+
+# This file is automatically built from main.less
+public/css/main.css
